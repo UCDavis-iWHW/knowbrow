@@ -1,4 +1,6 @@
-Commands to open lange-research.html on a localhost:
+Commands to open lange-research.html on a localhost
+-----------
+
 
 $ npm install -g http-server
 $ http-server -c-1
