@@ -1,6 +1,7 @@
 import json
 import collections
 import MySQLdb
+import json as simplejson
  
 db = MySQLdb.connect(host="localhost", user="root", passwd="ilbaloney.", db="MammalsDB20150827_el_be")
 cursor = db.cursor()
@@ -20,8 +21,9 @@ print table_nm
 cursor.close()
 
 #get attributes in each table in database
+rowarray_list = []
 for name in table_nm:
-	rowarray_list = []
+	
 	cursor = db.cursor()
 	cursor.execute("SELECT * FROM " + name)
 	rows = cursor.fetchall()
@@ -32,12 +34,14 @@ for name in table_nm:
 		t = dict(zip(columns, row))
 		rowarray_list.append(t)
 
-	#create json for data
-	j = json.dumps(rowarray_list)
 
-	#put json data into a file
-	rowarrays_file = 'json/'+name + '.json'
-	f = open(rowarrays_file,'w')
-	print >> f, j
+#create json for data
+j = json.dumps(rowarray_list, sort_keys=True, indent=4)
 
-	cursor.close()
+#put json data into a file
+# rowarrays_file = 'json/'+name + '.json'
+rowarrays_file = 'json/milkdata.json'
+f = open(rowarrays_file,'w')
+print >> f, j
+
+cursor.close()

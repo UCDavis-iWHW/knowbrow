@@ -12,26 +12,26 @@ var svg = d3.select("body").append("svg")
     .attr("width", width)
     .attr("height", height);
 
-d3.json("js/miserables.json", function(error, graph) {
+d3.json("js/miserables.json", function(error, milk) {
   if (error) throw error;
 
   force
-      .nodes(graph.nodes)
-      .links(graph.links)
+      .ID(milk.ID)
+      .BioactiveID(milk.BioactiveID)
       .start();
 
   var link = svg.selectAll(".link")
-      .data(graph.links)
+      .data(milk.BioactiveID)
     .enter().append("line")
       .attr("class", "link")
-      .style("stroke-width", function(d) { return Math.sqrt(d.value); });
+      .style("stroke-width", function(d) { return Math.sqrt(d.ID); });
 
   var node = svg.selectAll(".node")
-      .data(graph.nodes)
+      .data(milk.ID)
     .enter().append("g").append("circle")
       .attr("class", "node")
       .attr("r", 15)
-      .style("fill", function(d) { return color(d.group); })
+      .style("fill", function(d) { return color(d.ID); })
       .call(force.drag);
 
   var text = svg.selectAll("g")
