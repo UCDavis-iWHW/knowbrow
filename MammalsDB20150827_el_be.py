@@ -39,7 +39,7 @@ for name in table_nm:
 		rowarray_list.append(t)
 		wrap[name] = rowarray_list
 
-	j = json.dumps(wrap, sort_keys=True, indent=4)
+j = json.dumps(wrap, sort_keys=True, indent=4)
 
 #store into json file 
 rowarrays_file = 'json/milkdata.json'
